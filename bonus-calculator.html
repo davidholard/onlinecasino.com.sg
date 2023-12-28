@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Bonus Calculator (OnlineCasino.com.sg)</title>
+</head>
+<body>
+<h1>Bonus Calculator</h1>
+<form id="calculatorForm">
+  <label for="depositAmount">Deposit amount, SGD:</label>
+  <input type="text" id="depositAmount" required>
+  <label for="bonusPercentage">Bonus percentage, %:</label>
+  <input type="text" id="bonusPercentage" required>
+  <button type="submit">Calculate</button>
+</form>
+<br>
+<div id="result"></div>
+<script>
+function calculateBonus(depositAmount, bonusPercentage) {
+  var bonusAmount = depositAmount * (bonusPercentage / 100);
+  return bonusAmount;
+}
+function formatBonusAmount(bonusAmount) {
+  return "SGD " + bonusAmount.toFixed(2);
+}
+function calculate() {
+  var depositInput = document.getElementById("depositAmount");
+  var bonusInput = document.getElementById("bonusPercentage");
+  var resultElement = document.getElementById("result");
+
+  var depositAmount = parseFloat(depositInput.value);
+  var bonusPercentage = parseFloat(bonusInput.value);
+  if (isNaN(depositAmount) || isNaN(bonusPercentage)) {
+    resultElement.textContent = "Please enter valid numbers.";
+    return;
+  }
+  var bonusAmount = calculateBonus(depositAmount, bonusPercentage);
+
+  var formattedBonusAmount = formatBonusAmount(bonusAmount);
+  resultElement.textContent = "Your bonus amount is: " + formattedBonusAmount;
+}
+
+var form = document.getElementById("calculatorForm");
+form.addEventListener("submit", function (event) {
+  event.preventDefault();
+  calculate();
+});
+</script>
+</body>
+</html>
